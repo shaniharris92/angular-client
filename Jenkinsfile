@@ -1,9 +1,20 @@
 pipeline {
-    agent { docker { image 'node:14-alpine' } }
+    agent any
+
+    tools { nodejs 'nodejs' }
+
     stages {
-        stage('build') {
+        stage('Install dependencies') {
             steps {
-                sh 'npm --version'
+                sh 'ls'
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'ls'
+                sh 'npm run test:ci'
             }
         }
     }
