@@ -1,6 +1,8 @@
 pipeline {
 
     tools { nodejs 'nodejs' }
+
+    tools { docker 'docker' }
     
     agent { dockerfile true }
     
