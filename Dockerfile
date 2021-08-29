@@ -1,18 +1,23 @@
-#FROM node:alpine as builder
-#WORKDIR '/app'
-#COPY ./package.json ./
-#RUN npm install
-#COPY . .
-#RUN npm run start
 
+# FROM node:alpine as build
+# WORKDIR '/app'
+# COPY ./package.json ./
+# RUN npm install
+# COPY . .
+# RUN npm run build
+
+# FROM nginx
+# EXPOSE 4200
+# COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+# COPY --from=build /app/build /usr/share/nginx/html
 
 # Stage 1: Compile and Build angular codebase
 
 # Use official node image as the base image
-FROM node:alpine as builder
+FROM node:latest as build
 
 # Set the working directory
-WORKDIR /home/azureuser/angular-client
+WORKDIR /home/azureuser/angular-client/
 
 # Add the source code to app
 COPY ./ /home/azureuser/angular-client/
