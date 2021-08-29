@@ -1,3 +1,6 @@
-FROM node:14-alpine
-
-RUN apk add -U subversion
+FROM node:alpine as builder
+WORKDIR '/app'
+COPY ./package.json ./
+RUN npm install
+COPY . .
+RUN npm run start
