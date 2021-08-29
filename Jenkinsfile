@@ -1,10 +1,14 @@
 pipeline {
 
     tools { nodejs 'nodejs' }
-
-    tools { docker 'docker' }
     
-    agent { dockerfile true }
+    agent {
+    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+    dockerfile {
+        additionalBuildArgs  '--build-arg version=1.0.2'
+        args '-v /tmp:/tmp'
+    }
+}
     
      stage('Initialize'){
         def dockerHome = tool 'myDocker'
